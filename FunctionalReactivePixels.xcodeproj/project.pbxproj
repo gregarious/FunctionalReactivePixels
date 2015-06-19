@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1803676E95FE056397A2634B /* libPods-FunctionalReactivePixels.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5B63BE3AE75875B4298D95 /* libPods-FunctionalReactivePixels.a */; };
 		37D3F65D1B34630900CA57D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F65C1B34630900CA57D2 /* main.m */; };
 		37D3F6601B34630900CA57D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F65F1B34630900CA57D2 /* AppDelegate.m */; };
 		37D3F6661B34630900CA57D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37D3F6641B34630900CA57D2 /* Main.storyboard */; };
@@ -15,7 +16,6 @@
 		37D3F6771B34630900CA57D2 /* FunctionalReactivePixelsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F6761B34630900CA57D2 /* FunctionalReactivePixelsTests.m */; };
 		37D3F6A41B34651F00CA57D2 /* FRPGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F6A31B34651F00CA57D2 /* FRPGalleryViewController.m */; };
 		37D3F6A71B34653700CA57D2 /* FRPGalleryFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F6A61B34653700CA57D2 /* FRPGalleryFlowLayout.m */; };
-		37E7040799A8FA3B50BC06A6 /* Pods_FunctionalReactivePixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF72423C533401C4E1BEBFB2 /* Pods_FunctionalReactivePixels.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,9 +77,9 @@
 		37D3F6A31B34651F00CA57D2 /* FRPGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRPGalleryViewController.m; sourceTree = "<group>"; };
 		37D3F6A51B34653700CA57D2 /* FRPGalleryFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRPGalleryFlowLayout.h; sourceTree = "<group>"; };
 		37D3F6A61B34653700CA57D2 /* FRPGalleryFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRPGalleryFlowLayout.m; sourceTree = "<group>"; };
+		6D5B63BE3AE75875B4298D95 /* libPods-FunctionalReactivePixels.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FunctionalReactivePixels.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12C168D61C1015C227F8D70 /* Pods-FunctionalReactivePixels.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunctionalReactivePixels.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FunctionalReactivePixels/Pods-FunctionalReactivePixels.debug.xcconfig"; sourceTree = "<group>"; };
 		DAC9C8694B4DD8303A760FDE /* Pods-FunctionalReactivePixels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunctionalReactivePixels.release.xcconfig"; path = "Pods/Target Support Files/Pods-FunctionalReactivePixels/Pods-FunctionalReactivePixels.release.xcconfig"; sourceTree = "<group>"; };
-		EF72423C533401C4E1BEBFB2 /* Pods_FunctionalReactivePixels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FunctionalReactivePixels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37E7040799A8FA3B50BC06A6 /* Pods_FunctionalReactivePixels.framework in Frameworks */,
+				1803676E95FE056397A2634B /* libPods-FunctionalReactivePixels.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +208,7 @@
 		C1188483AA0699C563BA05B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EF72423C533401C4E1BEBFB2 /* Pods_FunctionalReactivePixels.framework */,
+				6D5B63BE3AE75875B4298D95 /* libPods-FunctionalReactivePixels.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,7 +233,6 @@
 				37D3F6531B34630900CA57D2 /* Sources */,
 				37D3F6541B34630900CA57D2 /* Frameworks */,
 				37D3F6551B34630900CA57D2 /* Resources */,
-				2A5AF2BD19E6E50147F689C1 /* Embed Pods Frameworks */,
 				F9DA663C01503CCD4C190D07 /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -321,21 +320,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A5AF2BD19E6E50147F689C1 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FunctionalReactivePixels/Pods-FunctionalReactivePixels-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5EE4E4D58E010D18FCB052AF /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -707,7 +707,7 @@ BOOL ext_getPropertyAccessorsForClass (objc_property_t property, Class aClass, M
     SEL setterName = attributes->setter;
     
     free(attributes);
-    attributes = NULL;
+    attributes = NO;
 
     /*
      * set up an autorelease pool in case this sends aClass its first message
