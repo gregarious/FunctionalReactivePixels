@@ -1,0 +1,511 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37D3F65D1B34630900CA57D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F65C1B34630900CA57D2 /* main.m */; };
+		37D3F6601B34630900CA57D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F65F1B34630900CA57D2 /* AppDelegate.m */; };
+		37D3F6661B34630900CA57D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37D3F6641B34630900CA57D2 /* Main.storyboard */; };
+		37D3F6681B34630900CA57D2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D3F6671B34630900CA57D2 /* Images.xcassets */; };
+		37D3F66B1B34630900CA57D2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3F6691B34630900CA57D2 /* LaunchScreen.xib */; };
+		37D3F6771B34630900CA57D2 /* FunctionalReactivePixelsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F6761B34630900CA57D2 /* FunctionalReactivePixelsTests.m */; };
+		37D3F6A41B34651F00CA57D2 /* FRPGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F6A31B34651F00CA57D2 /* FRPGalleryViewController.m */; };
+		37D3F6A71B34653700CA57D2 /* FRPGalleryFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3F6A61B34653700CA57D2 /* FRPGalleryFlowLayout.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		37D3F6711B34630900CA57D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37D3F64F1B34630900CA57D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37D3F6561B34630900CA57D2;
+			remoteInfo = FunctionalReactivePixels;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		37D3F6571B34630900CA57D2 /* FunctionalReactivePixels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunctionalReactivePixels.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D3F65B1B34630900CA57D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37D3F65C1B34630900CA57D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		37D3F65E1B34630900CA57D2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		37D3F65F1B34630900CA57D2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		37D3F6651B34630900CA57D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		37D3F6671B34630900CA57D2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		37D3F66A1B34630900CA57D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		37D3F6701B34630900CA57D2 /* FunctionalReactivePixelsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FunctionalReactivePixelsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D3F6751B34630900CA57D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37D3F6761B34630900CA57D2 /* FunctionalReactivePixelsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FunctionalReactivePixelsTests.m; sourceTree = "<group>"; };
+		37D3F6811B34639B00CA57D2 /* FRP-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRP-Prefix.pch"; sourceTree = "<group>"; };
+		37D3F6821B34639B00CA57D2 /* FRPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPAppDelegate.h; sourceTree = "<group>"; };
+		37D3F6831B34639B00CA57D2 /* FRPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPAppDelegate.m; sourceTree = "<group>"; };
+		37D3F6841B34639B00CA57D2 /* FRPCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPCell.h; sourceTree = "<group>"; };
+		37D3F6851B34639B00CA57D2 /* FRPCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPCell.m; sourceTree = "<group>"; };
+		37D3F6861B34639B00CA57D2 /* FRPFullSizePhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPFullSizePhotoViewController.h; sourceTree = "<group>"; };
+		37D3F6871B34639B00CA57D2 /* FRPFullSizePhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPFullSizePhotoViewController.m; sourceTree = "<group>"; };
+		37D3F6881B34639B00CA57D2 /* FRPFullSizePhotoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPFullSizePhotoViewModel.h; sourceTree = "<group>"; };
+		37D3F6891B34639B00CA57D2 /* FRPFullSizePhotoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPFullSizePhotoViewModel.m; sourceTree = "<group>"; };
+		37D3F68A1B34639B00CA57D2 /* FRPGalleryFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPGalleryFlowLayout.h; sourceTree = "<group>"; };
+		37D3F68B1B34639B00CA57D2 /* FRPGalleryFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPGalleryFlowLayout.m; sourceTree = "<group>"; };
+		37D3F68C1B34639B00CA57D2 /* FRPGalleryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPGalleryViewController.h; sourceTree = "<group>"; };
+		37D3F68D1B34639B00CA57D2 /* FRPGalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPGalleryViewController.m; sourceTree = "<group>"; };
+		37D3F68E1B34639B00CA57D2 /* FRPGalleryViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPGalleryViewModel.h; sourceTree = "<group>"; };
+		37D3F68F1B34639B00CA57D2 /* FRPGalleryViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPGalleryViewModel.m; sourceTree = "<group>"; };
+		37D3F6901B34639B00CA57D2 /* FRPLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPLoginViewController.h; sourceTree = "<group>"; };
+		37D3F6911B34639B00CA57D2 /* FRPLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPLoginViewController.m; sourceTree = "<group>"; };
+		37D3F6921B34639B00CA57D2 /* FRPLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FRPLoginViewController.xib; sourceTree = "<group>"; };
+		37D3F6931B34639B00CA57D2 /* FRPLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPLoginViewModel.h; sourceTree = "<group>"; };
+		37D3F6941B34639B00CA57D2 /* FRPLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPLoginViewModel.m; sourceTree = "<group>"; };
+		37D3F6951B34639B00CA57D2 /* FRPPhotoDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPPhotoDetailViewController.h; sourceTree = "<group>"; };
+		37D3F6961B34639B00CA57D2 /* FRPPhotoDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPPhotoDetailViewController.m; sourceTree = "<group>"; };
+		37D3F6971B34639B00CA57D2 /* FRPPhotoDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPPhotoDetailViewModel.h; sourceTree = "<group>"; };
+		37D3F6981B34639B00CA57D2 /* FRPPhotoDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPPhotoDetailViewModel.m; sourceTree = "<group>"; };
+		37D3F6991B34639B00CA57D2 /* FRPPhotoImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPPhotoImporter.h; sourceTree = "<group>"; };
+		37D3F69A1B34639B00CA57D2 /* FRPPhotoImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPPhotoImporter.m; sourceTree = "<group>"; };
+		37D3F69B1B34639B00CA57D2 /* FRPPhotoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPPhotoModel.h; sourceTree = "<group>"; };
+		37D3F69C1B34639B00CA57D2 /* FRPPhotoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPPhotoModel.m; sourceTree = "<group>"; };
+		37D3F69D1B34639B00CA57D2 /* FRPPhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPPhotoViewController.h; sourceTree = "<group>"; };
+		37D3F69E1B34639B00CA57D2 /* FRPPhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPPhotoViewController.m; sourceTree = "<group>"; };
+		37D3F69F1B34639B00CA57D2 /* FRPPhotoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRPPhotoViewModel.h; sourceTree = "<group>"; };
+		37D3F6A01B34639B00CA57D2 /* FRPPhotoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRPPhotoViewModel.m; sourceTree = "<group>"; };
+		37D3F6A11B34639B00CA57D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		37D3F6A21B34651F00CA57D2 /* FRPGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRPGalleryViewController.h; sourceTree = "<group>"; };
+		37D3F6A31B34651F00CA57D2 /* FRPGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRPGalleryViewController.m; sourceTree = "<group>"; };
+		37D3F6A51B34653700CA57D2 /* FRPGalleryFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRPGalleryFlowLayout.h; sourceTree = "<group>"; };
+		37D3F6A61B34653700CA57D2 /* FRPGalleryFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRPGalleryFlowLayout.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37D3F6541B34630900CA57D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D3F66D1B34630900CA57D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37D3F64E1B34630900CA57D2 = {
+			isa = PBXGroup;
+			children = (
+				37D3F6801B34631500CA57D2 /* Book Source */,
+				37D3F6591B34630900CA57D2 /* FunctionalReactivePixels */,
+				37D3F6731B34630900CA57D2 /* FunctionalReactivePixelsTests */,
+				37D3F6581B34630900CA57D2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		37D3F6581B34630900CA57D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37D3F6571B34630900CA57D2 /* FunctionalReactivePixels.app */,
+				37D3F6701B34630900CA57D2 /* FunctionalReactivePixelsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37D3F6591B34630900CA57D2 /* FunctionalReactivePixels */ = {
+			isa = PBXGroup;
+			children = (
+				37D3F65E1B34630900CA57D2 /* AppDelegate.h */,
+				37D3F65F1B34630900CA57D2 /* AppDelegate.m */,
+				37D3F6A21B34651F00CA57D2 /* FRPGalleryViewController.h */,
+				37D3F6A31B34651F00CA57D2 /* FRPGalleryViewController.m */,
+				37D3F6A51B34653700CA57D2 /* FRPGalleryFlowLayout.h */,
+				37D3F6A61B34653700CA57D2 /* FRPGalleryFlowLayout.m */,
+				37D3F6641B34630900CA57D2 /* Main.storyboard */,
+				37D3F6671B34630900CA57D2 /* Images.xcassets */,
+				37D3F6691B34630900CA57D2 /* LaunchScreen.xib */,
+				37D3F65A1B34630900CA57D2 /* Supporting Files */,
+			);
+			path = FunctionalReactivePixels;
+			sourceTree = "<group>";
+		};
+		37D3F65A1B34630900CA57D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				37D3F65B1B34630900CA57D2 /* Info.plist */,
+				37D3F65C1B34630900CA57D2 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		37D3F6731B34630900CA57D2 /* FunctionalReactivePixelsTests */ = {
+			isa = PBXGroup;
+			children = (
+				37D3F6761B34630900CA57D2 /* FunctionalReactivePixelsTests.m */,
+				37D3F6741B34630900CA57D2 /* Supporting Files */,
+			);
+			path = FunctionalReactivePixelsTests;
+			sourceTree = "<group>";
+		};
+		37D3F6741B34630900CA57D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				37D3F6751B34630900CA57D2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		37D3F6801B34631500CA57D2 /* Book Source */ = {
+			isa = PBXGroup;
+			children = (
+				37D3F6811B34639B00CA57D2 /* FRP-Prefix.pch */,
+				37D3F6821B34639B00CA57D2 /* FRPAppDelegate.h */,
+				37D3F6831B34639B00CA57D2 /* FRPAppDelegate.m */,
+				37D3F6841B34639B00CA57D2 /* FRPCell.h */,
+				37D3F6851B34639B00CA57D2 /* FRPCell.m */,
+				37D3F6861B34639B00CA57D2 /* FRPFullSizePhotoViewController.h */,
+				37D3F6871B34639B00CA57D2 /* FRPFullSizePhotoViewController.m */,
+				37D3F6881B34639B00CA57D2 /* FRPFullSizePhotoViewModel.h */,
+				37D3F6891B34639B00CA57D2 /* FRPFullSizePhotoViewModel.m */,
+				37D3F68A1B34639B00CA57D2 /* FRPGalleryFlowLayout.h */,
+				37D3F68B1B34639B00CA57D2 /* FRPGalleryFlowLayout.m */,
+				37D3F68C1B34639B00CA57D2 /* FRPGalleryViewController.h */,
+				37D3F68D1B34639B00CA57D2 /* FRPGalleryViewController.m */,
+				37D3F68E1B34639B00CA57D2 /* FRPGalleryViewModel.h */,
+				37D3F68F1B34639B00CA57D2 /* FRPGalleryViewModel.m */,
+				37D3F6901B34639B00CA57D2 /* FRPLoginViewController.h */,
+				37D3F6911B34639B00CA57D2 /* FRPLoginViewController.m */,
+				37D3F6921B34639B00CA57D2 /* FRPLoginViewController.xib */,
+				37D3F6931B34639B00CA57D2 /* FRPLoginViewModel.h */,
+				37D3F6941B34639B00CA57D2 /* FRPLoginViewModel.m */,
+				37D3F6951B34639B00CA57D2 /* FRPPhotoDetailViewController.h */,
+				37D3F6961B34639B00CA57D2 /* FRPPhotoDetailViewController.m */,
+				37D3F6971B34639B00CA57D2 /* FRPPhotoDetailViewModel.h */,
+				37D3F6981B34639B00CA57D2 /* FRPPhotoDetailViewModel.m */,
+				37D3F6991B34639B00CA57D2 /* FRPPhotoImporter.h */,
+				37D3F69A1B34639B00CA57D2 /* FRPPhotoImporter.m */,
+				37D3F69B1B34639B00CA57D2 /* FRPPhotoModel.h */,
+				37D3F69C1B34639B00CA57D2 /* FRPPhotoModel.m */,
+				37D3F69D1B34639B00CA57D2 /* FRPPhotoViewController.h */,
+				37D3F69E1B34639B00CA57D2 /* FRPPhotoViewController.m */,
+				37D3F69F1B34639B00CA57D2 /* FRPPhotoViewModel.h */,
+				37D3F6A01B34639B00CA57D2 /* FRPPhotoViewModel.m */,
+				37D3F6A11B34639B00CA57D2 /* main.m */,
+			);
+			path = "Book Source";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		37D3F6561B34630900CA57D2 /* FunctionalReactivePixels */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37D3F67A1B34630900CA57D2 /* Build configuration list for PBXNativeTarget "FunctionalReactivePixels" */;
+			buildPhases = (
+				37D3F6531B34630900CA57D2 /* Sources */,
+				37D3F6541B34630900CA57D2 /* Frameworks */,
+				37D3F6551B34630900CA57D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FunctionalReactivePixels;
+			productName = FunctionalReactivePixels;
+			productReference = 37D3F6571B34630900CA57D2 /* FunctionalReactivePixels.app */;
+			productType = "com.apple.product-type.application";
+		};
+		37D3F66F1B34630900CA57D2 /* FunctionalReactivePixelsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37D3F67D1B34630900CA57D2 /* Build configuration list for PBXNativeTarget "FunctionalReactivePixelsTests" */;
+			buildPhases = (
+				37D3F66C1B34630900CA57D2 /* Sources */,
+				37D3F66D1B34630900CA57D2 /* Frameworks */,
+				37D3F66E1B34630900CA57D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37D3F6721B34630900CA57D2 /* PBXTargetDependency */,
+			);
+			name = FunctionalReactivePixelsTests;
+			productName = FunctionalReactivePixelsTests;
+			productReference = 37D3F6701B34630900CA57D2 /* FunctionalReactivePixelsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37D3F64F1B34630900CA57D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Gregarious Development";
+				TargetAttributes = {
+					37D3F6561B34630900CA57D2 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					37D3F66F1B34630900CA57D2 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 37D3F6561B34630900CA57D2;
+					};
+				};
+			};
+			buildConfigurationList = 37D3F6521B34630900CA57D2 /* Build configuration list for PBXProject "FunctionalReactivePixels" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 37D3F64E1B34630900CA57D2;
+			productRefGroup = 37D3F6581B34630900CA57D2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37D3F6561B34630900CA57D2 /* FunctionalReactivePixels */,
+				37D3F66F1B34630900CA57D2 /* FunctionalReactivePixelsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		37D3F6551B34630900CA57D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D3F6661B34630900CA57D2 /* Main.storyboard in Resources */,
+				37D3F66B1B34630900CA57D2 /* LaunchScreen.xib in Resources */,
+				37D3F6681B34630900CA57D2 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D3F66E1B34630900CA57D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37D3F6531B34630900CA57D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D3F6601B34630900CA57D2 /* AppDelegate.m in Sources */,
+				37D3F6A41B34651F00CA57D2 /* FRPGalleryViewController.m in Sources */,
+				37D3F65D1B34630900CA57D2 /* main.m in Sources */,
+				37D3F6A71B34653700CA57D2 /* FRPGalleryFlowLayout.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D3F66C1B34630900CA57D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D3F6771B34630900CA57D2 /* FunctionalReactivePixelsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37D3F6721B34630900CA57D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37D3F6561B34630900CA57D2 /* FunctionalReactivePixels */;
+			targetProxy = 37D3F6711B34630900CA57D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		37D3F6641B34630900CA57D2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37D3F6651B34630900CA57D2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		37D3F6691B34630900CA57D2 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37D3F66A1B34630900CA57D2 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		37D3F6781B34630900CA57D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		37D3F6791B34630900CA57D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		37D3F67B1B34630900CA57D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = FunctionalReactivePixels/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		37D3F67C1B34630900CA57D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = FunctionalReactivePixels/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		37D3F67E1B34630900CA57D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FunctionalReactivePixelsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FunctionalReactivePixels.app/FunctionalReactivePixels";
+			};
+			name = Debug;
+		};
+		37D3F67F1B34630900CA57D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FunctionalReactivePixelsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FunctionalReactivePixels.app/FunctionalReactivePixels";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		37D3F6521B34630900CA57D2 /* Build configuration list for PBXProject "FunctionalReactivePixels" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D3F6781B34630900CA57D2 /* Debug */,
+				37D3F6791B34630900CA57D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37D3F67A1B34630900CA57D2 /* Build configuration list for PBXNativeTarget "FunctionalReactivePixels" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D3F67B1B34630900CA57D2 /* Debug */,
+				37D3F67C1B34630900CA57D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		37D3F67D1B34630900CA57D2 /* Build configuration list for PBXNativeTarget "FunctionalReactivePixelsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D3F67E1B34630900CA57D2 /* Debug */,
+				37D3F67F1B34630900CA57D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 37D3F64F1B34630900CA57D2 /* Project object */;
+}
