@@ -15,7 +15,7 @@
 
 @interface FRPPhotoViewController ()
 @property (nonatomic, readwrite) NSInteger photoIndex;
-@property (nonatomic, strong) FRPPhotoModel *photoModel;
+@property (nonatomic, readwrite) FRPPhotoModel *photoModel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @end

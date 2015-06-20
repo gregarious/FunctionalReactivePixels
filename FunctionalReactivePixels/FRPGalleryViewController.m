@@ -59,6 +59,7 @@ static NSString * const reuseIdentifier = @"Cell";
         FRPCell *selectedCell = sender;
         NSInteger selectedIndex = [[self.collectionView indexPathForCell:selectedCell] item];
         
+        vc.delegate = self;
         [vc setPhotoModels:self.photosArray currentPhotoIndex:selectedIndex];
     }
 }

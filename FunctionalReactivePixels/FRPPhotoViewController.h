@@ -11,6 +11,7 @@
 
 @interface FRPPhotoViewController : UIViewController
 
+@property (nonatomic, strong, readonly) FRPPhotoModel *photoModel;
 @property (nonatomic, readonly) NSInteger photoIndex;
 
 - (void)setPhotoModel:(FRPPhotoModel *)photoModel photoIndex:(NSInteger)index;
