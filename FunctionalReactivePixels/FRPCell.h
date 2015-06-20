@@ -12,6 +12,7 @@
 
 @interface FRPCell : UICollectionViewCell
 
-- (void)setThumbnailImage:(UIImage *)image;
+// using view model here -- controller doesn't need to know details about what the view needs
+- (void)setPhotoModel:(FRPPhotoModel *)model;
 
 @end

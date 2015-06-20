@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class RACSignal;
 @class FRPPhotoModel;
 
 @interface FRPPhotoImporter : NSObject
 
-+ (void)importPhotosWithCompletionBlock:(void (^)(NSArray *photos, NSError* error))completion;
-+ (void)fetchPhotoDetails:(FRPPhotoModel *)photoModel completionBlock:(void (^)(FRPPhotoModel *photo, NSError *error))completion;
+// don't need any completion blocks here because we have signals
+// also, having the image data be part of the PhotoModel allows us to avoid explicit "downloadImage" methods. instead we can just listen for KVO signals for changes that are initiated inside these methods.
 
-+ (void)downloadThumbnailForPhotoModel:(FRPPhotoModel *)photoModel completionBlock:(void (^)(NSData *data, NSError *error))completion;
-+ (void)downloadFullsizedImageForPhotoModel:(FRPPhotoModel *)photoModel completionBlock:(void (^)(NSData *data, NSError *error))completion;
++ (RACSignal *)importPhotos;
++ (RACSignal *)fetchPhotoDetails:(FRPPhotoModel *)photoModel;
 
 @end

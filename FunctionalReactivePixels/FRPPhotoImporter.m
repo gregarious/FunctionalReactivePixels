@@ -7,6 +7,7 @@
 //
 
 #import <500px-iOS-api/PXAPI.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "FRPPhotoImporter.h"
 #import "FRPPhotoModel.h"
@@ -16,34 +17,41 @@
 
 @implementation FRPPhotoImporter
 
-+ (void)importPhotosWithCompletionBlock:(void (^)(NSArray *photos, NSError *error))completion
-{
++ (RACSignal *)importPhotos {
+    RACReplaySubject *subject = [RACReplaySubject subject];
+    
     NSURLRequest *request = [self popularURLRequest];
     
     [NSURLConnection
-     sendAsynchronousRequest:request
-     queue:[NSOperationQueue mainQueue]
-     completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-         if (data) {
-             id results = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-             NSArray *rawPhotos = results[@"photos"];
-
-             NSMutableArray *photos = [NSMutableArray arrayWithCapacity:rawPhotos.count];
-             for (NSDictionary *photoDictionary in results[@"photos"]) {
-                 FRPPhotoModel *model = [[FRPPhotoModel alloc] init];
-                 [self configurePhotoModel:model withDictionary:photoDictionary];
-                 [photos addObject:model];
+         sendAsynchronousRequest:request
+         queue:[NSOperationQueue mainQueue]
+         completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+             if (data) {
+                 id results = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                 
+                 // sending a sequence of parsed photos as the signal. we'll parse them all and complete the subject signal all at once, making this a glorified NSArray, but returning them 1-by-1 is out of the scope of the book
+                 
+                 RACSequence *photosSequence = [results[@"photos"] rac_sequence];
+                 [subject sendNext:[[photosSequence map:^id(NSDictionary *photoDictionary) {
+                     FRPPhotoModel *model = [[FRPPhotoModel alloc] init];
+                     [self configurePhotoModel:model withDictionary:photoDictionary];
+                     
+                     [self downloadThumbnailForPhotoModel:model];
+                     return model;
+                 }] array]];
+                 [subject sendCompleted];
              }
-             completion(photos, nil);
-         }
-         else {
-             completion(nil, connectionError);
-         }
+             else {
+                 [subject sendError:connectionError];
+             }
      }];
+    
+    return subject;
 }
 
-+ (void)fetchPhotoDetails:(FRPPhotoModel *)photoModel completionBlock:(void (^)(FRPPhotoModel *photo, NSError *error))completion
++ (RACSignal *)fetchPhotoDetails:(FRPPhotoModel *)photoModel
 {
+    RACReplaySubject *subject = [RACReplaySubject subject];
     NSURLRequest *request = [self photoURLRequest:photoModel];
     
     [NSURLConnection
@@ -52,13 +60,20 @@
      completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
          if (data) {
              id results = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil][@"photo"];
+             
+             // sending a single photo through the signal and then completing. really just acting like a basic async promise.
+             
              [self configurePhotoModel:photoModel withDictionary:results];
-             completion(photoModel, nil);
+             [self downloadFullsizedImageForPhotoModel:photoModel];
+             [subject sendNext:photoModel];
+             [subject sendCompleted];
          }
          else {
-             completion(nil, connectionError);
+             [subject sendError:connectionError];
          }
      }];
+
+    return subject;
 }
 
 + (PXAPIHelper *)systemAPIHelper
@@ -108,27 +123,27 @@
      );
      */
     
-    for (NSDictionary *imageAttr in array) {
-        if ([imageAttr[@"size"] integerValue] == size) {
-            return imageAttr[@"url"];
-        }
-    }
-    return nil;
+    // functional way of returning the first url of the given size. don't really this this has any advantages of declarative version. in fact, IMO the declarative for-in loop is more readable in ObjC
+    return [[[[[array rac_sequence] filter:^BOOL(NSDictionary *value) {
+        return [value[@"size"] integerValue] == size;
+    }] map:^id(id value) {
+        return value[@"url"];
+    }] array] firstObject];
 }
 
-+ (void)downloadThumbnailForPhotoModel:(FRPPhotoModel *)photoModel completionBlock:(void (^)(NSData *, NSError *))completion {
-    [self download:photoModel.thumbnailURL withCompletion:^(NSData *data, NSError *error) {
-        completion(data, error);
++ (void)downloadThumbnailForPhotoModel:(FRPPhotoModel *)photoModel {
+    [self download:photoModel.thumbnailURL withCompletion:^(NSData *data) {
+        photoModel.thumbnailData = data;
     }];
 }
 
-+ (void)downloadFullsizedImageForPhotoModel:(FRPPhotoModel *)photoModel completionBlock:(void (^)(NSData *, NSError *))completion {
-    [self download:photoModel.fullsizedURL withCompletion:^(NSData *data, NSError *error) {
-        completion(data, error);
++ (void)downloadFullsizedImageForPhotoModel:(FRPPhotoModel *)photoModel {
+    [self download:photoModel.fullsizedURL withCompletion:^(NSData *data) {
+        photoModel.fullsizedData = data;
     }];
 }
 
-+ (void)download:(NSString *)urlString withCompletion:(void(^)(NSData *data, NSError *error))completion
++ (void)download:(NSString *)urlString withCompletion:(void(^)(NSData *data))completion
 {
     NSAssert(urlString, @"URL must not be nil");
     
@@ -137,7 +152,7 @@
      sendAsynchronousRequest:request
      queue:[NSOperationQueue mainQueue]
      completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-         completion(data, connectionError);
+         completion(data);
      }];
 }
 

@@ -10,6 +10,7 @@
 #import "FRPPhotoModel.h"
 #import "FRPPhotoImporter.h"
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 
 @interface FRPPhotoViewController ()
@@ -23,6 +24,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // bind our imageView to be reactive to view model's data changes
+    RAC(self.imageView, image) = [RACObserve(self.photoModel, fullsizedData) map:^id(id value) {
+        return [UIImage imageWithData:value];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -32,27 +38,16 @@
     if (self.imageView.image == nil) {
         [SVProgressHUD show];
         
-        __weak FRPPhotoViewController *weakSelf = self;
-        // first pull the extended photo details
-        [FRPPhotoImporter fetchPhotoDetails:self.photoModel completionBlock:^(FRPPhotoModel *photo, NSError *error) {
-            if (photo) {
-                // then the
-                [FRPPhotoImporter downloadFullsizedImageForPhotoModel:photo completionBlock:^(NSData *data, NSError *error) {
-                    if (data) {
-                        [SVProgressHUD dismiss];
-                        weakSelf.imageView.image = [UIImage imageWithData:data];
-                    }
-                    else {
-                        [SVProgressHUD showErrorWithStatus:@"Error"];
-                    }
-                }];
-            }
-            else {
-                [SVProgressHUD showErrorWithStatus:@"Error"];
-            }
+        // big win here. no nested callbacks. just simply initiate soemthing that will mutate our viewmodel. this lets us hide the inner fetch since we know the above binding will update when appropriate
+        // we still do need to keep track of our loading indicator though, but it's much more clear to see the flow here
+        
+        [[FRPPhotoImporter fetchPhotoDetails:self.photoModel] subscribeError:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"Error"];
+        } completed:^{
+            [SVProgressHUD dismiss];
         }];
-    }
-}
+
+    }}
 
 - (void)setPhotoModel:(FRPPhotoModel *)photoModel photoIndex:(NSInteger)index
 {
