@@ -12,6 +12,6 @@
 
 @interface FRPCell : UICollectionViewCell
 
-- (void)setThumbnailImage:(UIImage *)image;
+- (void)setPhotoModel:(FRPPhotoModel *)model;
 
 @end

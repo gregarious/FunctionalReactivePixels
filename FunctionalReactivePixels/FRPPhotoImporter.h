@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class RACSignal;
 @class FRPPhotoModel;
 
 @interface FRPPhotoImporter : NSObject
 
-+ (RACSignal *)importPhotos;
-+ (RACSignal *)fetchPhotoDetails:(FRPPhotoModel *)photoModel;
++ (void)importPhotosWithCompletionBlock:(void (^)(NSArray *photos, NSError* error))completion;
++ (void)fetchPhotoDetails:(FRPPhotoModel *)photoModel completionBlock:(void (^)(FRPPhotoModel *photo, NSError *error))completion;
+
++ (void)downloadThumbnailForPhotoModel:(FRPPhotoModel *)photoModel completionBlock:(void (^)(NSData *data, NSError *error))completion;
++ (void)downloadFullsizedImageForPhotoModel:(FRPPhotoModel *)photoModel completionBlock:(void (^)(NSData *data, NSError *error))completion;
 
 @end

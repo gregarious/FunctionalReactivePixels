@@ -10,6 +10,7 @@
 #import "FRPPhotoModel.h"
 #import "FRPPhotoImporter.h"
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 
 @interface FRPPhotoViewController ()
@@ -23,6 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    RAC(self.imageView, image) = [RACObserve(self.photoModel, fullsizedData) map:^id(id value) {
+        return [UIImage imageWithData:value];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -31,28 +36,13 @@
     
     if (self.imageView.image == nil) {
         [SVProgressHUD show];
-        
-        __weak FRPPhotoViewController *weakSelf = self;
-        // first pull the extended photo details
-        [FRPPhotoImporter fetchPhotoDetails:self.photoModel completionBlock:^(FRPPhotoModel *photo, NSError *error) {
-            if (photo) {
-                // then the
-                [FRPPhotoImporter downloadFullsizedImageForPhotoModel:photo completionBlock:^(NSData *data, NSError *error) {
-                    if (data) {
-                        [SVProgressHUD dismiss];
-                        weakSelf.imageView.image = [UIImage imageWithData:data];
-                    }
-                    else {
-                        [SVProgressHUD showErrorWithStatus:@"Error"];
-                    }
-                }];
-            }
-            else {
-                [SVProgressHUD showErrorWithStatus:@"Error"];
-            }
+        [[FRPPhotoImporter fetchPhotoDetails:self.photoModel] subscribeError:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"Error"];
+        } completed:^{
+            [SVProgressHUD dismiss];
         }];
-    }
-}
+
+    }}
 
 - (void)setPhotoModel:(FRPPhotoModel *)photoModel photoIndex:(NSInteger)index
 {

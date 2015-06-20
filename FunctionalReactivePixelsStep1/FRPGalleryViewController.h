@@ -1,5 +1,5 @@
 //
-//  FRPCell.h
+//  FRPGalleryViewController.h
 //  FunctionalReactivePixels
 //
 //  Created by Greg Nicholas on 6/19/15.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class FRPPhotoModel;
-
-@interface FRPCell : UICollectionViewCell
-
-- (void)setThumbnailImage:(UIImage *)image;
+@interface FRPGalleryViewController : UICollectionViewController
 
 @end

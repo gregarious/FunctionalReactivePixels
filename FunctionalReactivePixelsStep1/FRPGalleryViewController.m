@@ -6,18 +6,20 @@
 //  Copyright (c) 2015 Gregarious Development. All rights reserved.
 //
 
+#import <libextobjc/EXTScope.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 #import "FRPGalleryFlowLayout.h"
 #import "FRPCell.h"
 
 #import "FRPPhotoImporter.h"
-#import "FRPPhotoModel.h"
 
 #import "FRPGalleryViewController.h"
 #import "FRPFullSizePhotoViewController.h"
 
 @interface FRPGalleryViewController () <FRPFullSizePhotoViewControllerDelegate>
 
-@property (nonatomic, copy) NSArray *photosArray;
+@property (nonatomic, strong) NSArray *photosArray;
 
 @end
 
@@ -30,18 +32,21 @@ static NSString * const reuseIdentifier = @"Cell";
 
     self.title = @"Popular on 500px";
     
+    // Uncomment the following line to preserve selection between presentations
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    @weakify(self);
+    [RACObserve(self, photosArray) subscribeNext:^(id x) {
+        @strongify(self);
+        [self.collectionView reloadData];
+    }];
+    
     [self loadPopularPhotos];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)setPhotosArray:(NSArray *)photosArray
-{
-    _photosArray = [photosArray copy];
-    [self.collectionView reloadData];
 }
 
 #pragma mark - Navigation
@@ -75,15 +80,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FRPCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    FRPPhotoModel *model = self.photosArray[indexPath.row];
-    [FRPPhotoImporter downloadThumbnailForPhotoModel:model completionBlock:^(NSData *data, NSError *error) {
-        if (data) {
-            [cell setThumbnailImage:[UIImage imageWithData:data]];
-        }
-        else {
-            NSLog(@"Thumbnail error: %@", error);
-        }
-    }];
+    [cell setPhotoModel:self.photosArray[indexPath.row]];
     return cell;
 }
 
@@ -99,9 +96,10 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark Helpers
 
 - (void)loadPopularPhotos {
-    [FRPPhotoImporter importPhotosWithCompletionBlock:^(NSArray *photos, NSError *err) {
-        self.photosArray = photos;
-        [self.collectionView reloadData];
+    [[FRPPhotoImporter importPhotos] subscribeNext:^(id x) {
+        self.photosArray = x;
+    } error:^(NSError *error) {
+        NSLog(@"Trouble fetching photos");
     }];
 }
 
