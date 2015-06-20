@@ -103,7 +103,6 @@
         sendAsynchronousRequest:request
         queue:[NSOperationQueue mainQueue]
         completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            NSLog(@"setting data for %@", photoModel.photoName);
             photoModel.thumbnailData = data;
         }];
 }
