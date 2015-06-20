@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qql-OX-hIF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -29,14 +30,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewLayout key="collectionViewLayout" id="FaM-4Y-cwq" customClass="FRPGalleryFlowLayout"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lu7-KQ-7HY">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="lu7-KQ-7HY" customClass="FRPCell">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="143" height="140"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pjc-92-5tZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="143" height="140"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Pjc-92-5tZ" secondAttribute="bottom" constant="-8" id="2Cb-4H-TcD"/>
+                                    <constraint firstItem="Pjc-92-5tZ" firstAttribute="top" secondItem="lu7-KQ-7HY" secondAttribute="topMargin" constant="-8" id="2G1-sX-Jnl"/>
+                                    <constraint firstItem="Pjc-92-5tZ" firstAttribute="leading" secondItem="lu7-KQ-7HY" secondAttribute="leadingMargin" constant="-8" id="El2-UY-tSk"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Pjc-92-5tZ" secondAttribute="trailing" constant="-8" id="XnN-LJ-Dkz"/>
+                                </constraints>
+                                <size key="customSize" width="143" height="140"/>
+                                <connections>
+                                    <outlet property="imageView" destination="Pjc-92-5tZ" id="Fwo-k8-PIU"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>

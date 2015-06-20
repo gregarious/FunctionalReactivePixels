@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <500px-iOS-api/PXAPI.h>
+
+@class PXAPIHelper;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-//@property (nonatomic, readonly) 
+@property (nonatomic, readonly) PXAPIHelper *apiHelper;
 
 @end
 

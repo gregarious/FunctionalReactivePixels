@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Gregarious Development. All rights reserved.
 //
 
+#import <500px-iOS-api/PXAPI.h>
+
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -15,8 +17,7 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     return YES;
 }
 

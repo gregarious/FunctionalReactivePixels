@@ -6,10 +6,19 @@
 //  Copyright (c) 2015 Gregarious Development. All rights reserved.
 //
 
-#import "FRPGalleryViewController.h"
+#import <libextobjc/EXTScope.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 #import "FRPGalleryFlowLayout.h"
+#import "FRPCell.h"
+
+#import "FRPPhotoImporter.h"
+
+#import "FRPGalleryViewController.h"
 
 @interface FRPGalleryViewController ()
+
+@property (nonatomic, strong) NSArray *photosArray;
 
 @end
 
@@ -20,13 +29,18 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"Popular on 500px";
+    
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    @weakify(self);
+    [RACObserve(self, photosArray) subscribeNext:^(id x) {
+        @strongify(self);
+        [self.collectionView reloadData];
+    }];
     
-    // Do any additional setup after loading the view.
+    [self loadPopularPhotos];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,21 +61,17 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete method implementation -- Return the number of sections
-    return 0;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete method implementation -- Return the number of items in the section
-    return 0;
+    return self.photosArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
+    FRPCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    [cell setPhotoModel:self.photosArray[indexPath.row]];
     return cell;
 }
 
@@ -95,5 +105,13 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 }
 */
+
+- (void)loadPopularPhotos {
+    [[FRPPhotoImporter importPhotos] subscribeNext:^(id x) {
+        self.photosArray = x;
+    } error:^(NSError *error) {
+        NSLog(@"Trouble fetching photos");
+    }];
+}
 
 @end
