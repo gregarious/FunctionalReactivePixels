@@ -14,33 +14,33 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (nonatomic, strong) RACDisposable *subscription;
-
 @end
 
 @implementation FRPCell
 
-- (void)setPhotoModel:(FRPPhotoModel *)photoModel
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    // this manually does the work of the RAC macro:
-    //  1. creates (and persists) a subscription to the photoModel.thumbnailData observe signal
-    //  2. binds the signal result to our imageView.image keypath
-    //
-    // we don't use RAC here because we need to keep a reference to the subscription for the sake of manually disposing it upon cell reuse
-    self.subscription = [[[RACObserve(photoModel, thumbnailData)
-                            filter:^BOOL(id value) {
-                                return value != nil;
-                            }]
-                            map: ^id(id value) {
-                                return [UIImage imageWithData:value];
-                            }]
-                            setKeyPath:@keypath(self.imageView, image)
-                              onObject:self.imageView];
+    self = [super initWithCoder:aDecoder];
+    if (self) [self commonInit];
+    return self;
 }
 
-- (void)prepareForReuse
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    [self.subscription dispose];
-    self.subscription = nil;
+    self = [super initWithFrame:frame];
+    if (self) [self commonInit];
+    return self;
 }
+
+- (void)commonInit
+{
+    // Directly bind our cell's image to a signal that will fire on *both* ViewModel and ViewModel image data changes. This way, the image responds to both data download completion and the overwriting of self.photoModel (which happens during cell reuse). This obviates the need for manually disposing of a particular model's signal on cell reuse
+    // Also note that we bind to self, not to self.imageView, because the imageView is currently nil. The TARGET argument must always be non-nil to correctly initialize a signal.
+    // Further note that I modified the books version here, removing the nil filter: if we don't have data yet, we want our signal to tell us so
+    RAC(self, imageView.image) = [RACObserve(self, photoModel.thumbnailData)
+                                  map:^id(NSData *data) {
+                                      return data != nil ? [UIImage imageWithData:data] : nil;
+                                  }];
+}
+
 @end

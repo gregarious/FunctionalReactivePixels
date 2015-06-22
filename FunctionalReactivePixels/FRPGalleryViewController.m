@@ -8,6 +8,7 @@
 
 #import <libextobjc/EXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACDelegateProxy.h>
 
 #import "FRPGalleryFlowLayout.h"
 #import "FRPCell.h"
@@ -17,9 +18,10 @@
 #import "FRPGalleryViewController.h"
 #import "FRPFullSizePhotoViewController.h"
 
-@interface FRPGalleryViewController () <FRPFullSizePhotoViewControllerDelegate>
+@interface FRPGalleryViewController ()
 
 @property (nonatomic, strong) NSArray *photosArray;
+@property (nonatomic, strong) RACDelegateProxy *viewControllerDelegate;
 
 @end
 
@@ -31,16 +33,43 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
 
     self.title = @"Popular on 500px";
-    
-    // basically the reactive version of reloading once setPhotosArray: is called
+
+    /* ReactiveCocoa Setup */
     
     @weakify(self);
-    [RACObserve(self, photosArray) subscribeNext:^(id x) {
+
+    // set up a delegation signal for the FullSize VC's delegation method
+    self.viewControllerDelegate = [[RACDelegateProxy alloc] initWithProtocol:@protocol(FRPFullSizePhotoViewControllerDelegate)];
+    [[self.viewControllerDelegate rac_signalForSelector:@selector(userDidScroll:toPhotoAtIndex:) fromProtocol:@protocol(FRPFullSizePhotoViewControllerDelegate)]
+        subscribeNext:^(RACTuple *value) {
+            @strongify(self);
+            NSInteger index = [value.second integerValue];
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]
+                                        atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+                                                animated:NO];
+        }];
+    
+    
+    // create a pass-through signal for the photo importer signal that handles the error, then directly bind the photosArray state to the signal
+    RACSignal *photoSignal = [FRPPhotoImporter importPhotos];
+    RACSignal *photosLoaded = [photoSignal catch:^RACSignal *(NSError *error) {
+        NSLog(@"Could not load photos from 550px: %@", error);
+        return photoSignal;
+    }];
+    // Note: catch: is similar to subscribeError: except that it lets non-errors pass through. Also, on error, it allows us to pass along a new signal to take the place of the errored one (though here we just want to complete the original signal)
+    
+    RAC(self, photosArray) = photosLoaded;
+    [photosLoaded subscribeCompleted:^{
         @strongify(self);
         [self.collectionView reloadData];
     }];
     
-    [self loadPopularPhotos];
+    // more concise version, with default error logging:
+//    RAC(self, photosArray) = [[[[FRPPhotoImporter importPhotos]
+//        doCompleted:^{
+//            @strongify(self);
+//            [self.collectionView reloadData];
+//        }] logError] catchTo:[RACSignal empty]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,8 +86,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
         FRPCell *selectedCell = sender;
         NSInteger selectedIndex = [[self.collectionView indexPathForCell:selectedCell] item];
+        vc.delegate = (id<FRPFullSizePhotoViewControllerDelegate>)self.viewControllerDelegate;
         
-        vc.delegate = self;
         [vc setPhotoModels:self.photosArray currentPhotoIndex:selectedIndex];
     }
 }
@@ -79,29 +108,11 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FRPCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    // just need the set the view-model once. the cell can take it from there gettign triggers for when it should update its content
+
+    // just need the set the view-model once. the cell can take it from there getting triggers for when it should update its content
     [cell setPhotoModel:self.photosArray[indexPath.row]];
+
     return cell;
-}
-
-#pragma mark <FRPFullSizePhotoViewControllerDelegate>
-
-- (void)userDidScroll:(FRPFullSizePhotoViewController *)viewController toPhotoAtIndex:(NSInteger)index
-{
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]
-                                atScrollPosition:UICollectionViewScrollPositionCenteredVertically
-                                        animated:NO];
-}
-
-#pragma mark Helpers
-
-- (void)loadPopularPhotos {
-    // reactive equivalent of setting photos in a completion block
-    [[FRPPhotoImporter importPhotos] subscribeNext:^(id x) {
-        self.photosArray = x;
-    } error:^(NSError *error) {
-        NSLog(@"Trouble fetching photos");
-    }];
 }
 
 @end

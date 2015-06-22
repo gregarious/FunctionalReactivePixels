@@ -13,6 +13,6 @@
 @interface FRPCell : UICollectionViewCell
 
 // using view model here -- controller doesn't need to know details about what the view needs
-- (void)setPhotoModel:(FRPPhotoModel *)model;
+@property (nonatomic, strong) FRPPhotoModel *photoModel;
 
 @end
