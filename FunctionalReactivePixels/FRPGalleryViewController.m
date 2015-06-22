@@ -52,10 +52,10 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // create a pass-through signal for the photo importer signal that handles the error, then directly bind the photosArray state to the signal
     RACSignal *photoSignal = [FRPPhotoImporter importPhotos];
-    RACSignal *photosLoaded = [photoSignal catch:^RACSignal *(NSError *error) {
+    RACSignal *photosLoaded = [[photoSignal catch:^RACSignal *(NSError *error) {
         NSLog(@"Could not load photos from 550px: %@", error);
         return photoSignal;
-    }];
+    }] deliverOn:[RACScheduler mainThreadScheduler]];
     // Note: catch: is similar to subscribeError: except that it lets non-errors pass through. Also, on error, it allows us to pass along a new signal to take the place of the errored one (though here we just want to complete the original signal)
     
     RAC(self, photosArray) = photosLoaded;

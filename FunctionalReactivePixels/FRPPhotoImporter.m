@@ -18,62 +18,42 @@
 @implementation FRPPhotoImporter
 
 + (RACSignal *)importPhotos {
-    RACReplaySubject *subject = [RACReplaySubject subject];
+    
+    // Notes about the methods used here:
+    // 1. reduceEach:   Allows us to unpack a tuple in the block arguments. No real compiler checking going on here, but it helps readability.
+    // 2. publish       Wraps the network signal in a multicast signal. This indirection ensures the network signal will only have one subscriber (and therefore only do its work once), but be able to be broadcast to any number of subscribers.
+    // 3. autoconnect:  Our multicast won't subscribe to it's underlying signal until it itself has a subscriber (it's cold). Since we don't have that subscriber on hand yet, but we do want our network call to start now, we force it to be hot with this call.
     
     NSURLRequest *request = [self popularURLRequest];
-    
-    [NSURLConnection
-         sendAsynchronousRequest:request
-         queue:[NSOperationQueue mainQueue]
-         completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-             if (data) {
-                 id results = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                 
-                 // sending a sequence of parsed photos as the signal. we'll parse them all and complete the subject signal all at once, making this a glorified NSArray, but returning them 1-by-1 is out of the scope of the book
-                 
-                 RACSequence *photosSequence = [results[@"photos"] rac_sequence];
-                 [subject sendNext:[[photosSequence map:^id(NSDictionary *photoDictionary) {
-                     FRPPhotoModel *model = [[FRPPhotoModel alloc] init];
-                     [self configurePhotoModel:model withDictionary:photoDictionary];
-                     
-                     [self downloadThumbnailForPhotoModel:model];
-                     return model;
-                 }] array]];
-                 [subject sendCompleted];
-             }
-             else {
-                 [subject sendError:connectionError];
-             }
-     }];
-    
-    return subject;
+    return [[[[[NSURLConnection rac_sendAsynchronousRequest:request]
+                reduceEach:^id(NSURLResponse *respone, NSData *data) {
+                   return data;
+                }]
+                map:^id(id data) {
+                    id results = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    return [[[results[@"photos"] rac_sequence] map:^id(NSDictionary *photoDictionary) {
+                        FRPPhotoModel *model = [[FRPPhotoModel alloc] init];
+                        [self configurePhotoModel:model withDictionary:photoDictionary];
+                        [self downloadThumbnailForPhotoModel:model];
+                        return model;
+                    }] array];
+                }] publish] autoconnect];
 }
 
 + (RACSignal *)fetchPhotoDetails:(FRPPhotoModel *)photoModel
 {
-    RACReplaySubject *subject = [RACReplaySubject subject];
     NSURLRequest *request = [self photoURLRequest:photoModel];
     
-    [NSURLConnection
-     sendAsynchronousRequest:request
-     queue:[NSOperationQueue mainQueue]
-     completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-         if (data) {
-             id results = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil][@"photo"];
-             
-             // sending a single photo through the signal and then completing. really just acting like a basic async promise.
-             
-             [self configurePhotoModel:photoModel withDictionary:results];
-             [self downloadFullsizedImageForPhotoModel:photoModel];
-             [subject sendNext:photoModel];
-             [subject sendCompleted];
-         }
-         else {
-             [subject sendError:connectionError];
-         }
-     }];
-
-    return subject;
+    return [[[[[NSURLConnection rac_sendAsynchronousRequest:request]
+                reduceEach:^id(NSURLResponse *respone, NSData *data) {
+                    return data;
+                }]
+                map:^id(NSData *data) {
+                    id results = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil][@"photo"];
+                    [self configurePhotoModel:photoModel withDictionary:results];
+                    [self downloadFullsizedImageForPhotoModel:photoModel];
+                    return photoModel;
+                }] publish] autoconnect];
 }
 
 + (PXAPIHelper *)systemAPIHelper

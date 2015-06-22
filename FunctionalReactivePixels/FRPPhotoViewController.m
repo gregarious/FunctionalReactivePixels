@@ -42,9 +42,13 @@
         // we still do need to keep track of our loading indicator though, but it's much more clear to see the flow here
         
         [[FRPPhotoImporter fetchPhotoDetails:self.photoModel] subscribeError:^(NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"Error"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showErrorWithStatus:@"Error"];
+            });
         } completed:^{
-            [SVProgressHUD dismiss];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
         }];
 
     }}
