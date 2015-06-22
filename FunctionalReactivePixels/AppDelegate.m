@@ -10,6 +10,9 @@
 
 #import "AppDelegate.h"
 
+@interface NoCachingURLCache : NSURLCache
+@end
+
 @interface AppDelegate ()
 
 @end
@@ -17,7 +20,8 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [NSURLCache setSharedURLCache:[[NoCachingURLCache alloc] init]];
     return YES;
 }
 
@@ -41,6 +45,15 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+@end
+
+@implementation NoCachingURLCache
+
+- (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forRequest:(NSURLRequest *)request
+{
+    return;
 }
 
 @end
