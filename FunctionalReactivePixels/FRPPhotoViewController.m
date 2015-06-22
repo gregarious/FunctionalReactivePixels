@@ -26,9 +26,9 @@
     [super viewDidLoad];
     
     // bind our imageView to be reactive to view model's data changes
-    RAC(self.imageView, image) = [RACObserve(self.photoModel, fullsizedData) map:^id(id value) {
+    RAC(self.imageView, image) = [[RACObserve(self.photoModel, fullsizedData) map:^id(id value) {
         return [UIImage imageWithData:value];
-    }];
+    }] deliverOn:[RACScheduler mainThreadScheduler]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
